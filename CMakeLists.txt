@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 3.0.0)
+project(exam VERSION 0.1.0)
+
+include(CTest)
+enable_testing()
+
+add_executable(exam main.cpp)
+set(CMAKE_CXX_COMPILER clang++)
+set(CMAKE CMAKE_PREFIX_PATH /mnt/d/linux_wsl_lib/libtorch/share/cmake/Torch) # linux path (libtorch linux version)
+find_package(Torch REQUIRED PATHS /mnt/d/linux_wsl_lib/libtorch) # linux path (libtorch linux version)
+include_directories(SYSTEM ${TORCH_INCLUDE_DIRS})
+target_link_libraries(exam ${TORCH_LIBRARIES})
+set(CPACK_PROJECT_NAME ${PROJECT_NAME})
+set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
+include(CPack)
